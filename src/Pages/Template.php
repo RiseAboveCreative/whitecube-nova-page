@@ -13,6 +13,8 @@ use Whitecube\NovaPage\Exceptions\TemplateContentNotFoundException;
 use Illuminate\Database\Eloquent\Concerns\HasAttributes;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 abstract class Template implements ArrayAccess
 {
@@ -173,8 +175,8 @@ abstract class Template implements ArrayAccess
     public function forceFill(array $attributes)
     {
         foreach ($attributes as $key => $value) {
-            $attribute = \Str::replace('->', '.', $key);
-            \Arr::set($this->attributes, $attribute, $value);
+            $attribute = Str::replace('->', '.', $key);
+            Arr::set($this->attributes, $attribute, $value);
         }
 
         return $this;
