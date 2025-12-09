@@ -56,7 +56,7 @@ class Manager extends Model
      *
      * @return void
      */
-    public function booted()
+    public function initialize()
     {
         $this->repository->registerRouteTemplates();
     }

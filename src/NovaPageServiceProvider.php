@@ -72,7 +72,7 @@ class NovaPageServiceProvider extends ServiceProvider
         ], 'nova-page-migrations');
 
         $this->app->booted(function() {
-            $this->app->make(Manager::class)->booted();
+            $this->app->make(Manager::class)->initialize();
         });
 
         $this->registerBladeDirectives();
