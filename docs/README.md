@@ -10,6 +10,8 @@ Laravel      | Nova       | nova-page
 :-------------|:----------|:----------
 \< 9.x        | < 4.0     | < 0.3.0
 9.x           | 4.0       | ^ 0.3.0
+10.x / 11.x   | 5.0       | ^ 0.3.0
+12.x          | 5.0       | ^ 0.3.0
 
 ```bash
 composer require whitecube/nova-page

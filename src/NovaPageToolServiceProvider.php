@@ -4,6 +4,7 @@ namespace Whitecube\NovaPage;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Nova\Http\Middleware\Authenticate;
 use Whitecube\NovaPage\Http\Middleware\Authorize;
 
 class NovaPageToolServiceProvider extends ServiceProvider
@@ -40,7 +41,7 @@ class NovaPageToolServiceProvider extends ServiceProvider
 
     protected function registerRoutes()
     {
-        Route::middleware(['nova', Authorize::class])
+        Route::middleware(['nova', Authenticate::class, Authorize::class])
             ->group(__DIR__.'/../routes/api.php');
     }
 }
