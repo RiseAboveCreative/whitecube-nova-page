@@ -6,6 +6,7 @@ use Illuminate\Routing\Controller;
 use Laravel\Nova\DeleteField;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Http\Requests\UpdateResourceRequest;
+use Illuminate\Http\JsonResponse;
 
 abstract class ResourceFieldDestroyController extends Controller
 {
@@ -20,9 +21,9 @@ abstract class ResourceFieldDestroyController extends Controller
      * Update a resource.
      *
      * @param  \Laravel\Nova\Http\Requests\UpdateResourceRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function handle(UpdateResourceRequest $request)
+    public function handle(UpdateResourceRequest $request): JsonResponse
     {
         $route = call_user_func($request->getRouteResolver());
         $route->setParameter('resource', $this->resourceName);
@@ -42,5 +43,7 @@ abstract class ResourceFieldDestroyController extends Controller
             $field,
             $template
         )->save();
+
+        return response()->json([], 204);
     }
 }

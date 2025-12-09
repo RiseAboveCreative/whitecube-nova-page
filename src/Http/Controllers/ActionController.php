@@ -4,6 +4,7 @@ namespace Whitecube\NovaPage\Http\Controllers;
 
 use Laravel\Nova\Http\Controllers\ActionController as Controller;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Illuminate\Http\JsonResponse;
 
 class ActionController extends Controller
 {
@@ -11,9 +12,9 @@ class ActionController extends Controller
      * List the actions for the given resource.
      *
      * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index(NovaRequest $request)
+    public function index(NovaRequest $request): JsonResponse
     {
         return response()->json([
             'actions' => [],

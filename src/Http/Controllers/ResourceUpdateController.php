@@ -5,6 +5,7 @@ namespace Whitecube\NovaPage\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Routing\Controller;
 use Laravel\Nova\Http\Requests\UpdateResourceRequest;
+use Illuminate\Http\JsonResponse;
 
 abstract class ResourceUpdateController extends Controller
 {
@@ -19,9 +20,9 @@ abstract class ResourceUpdateController extends Controller
      * Update a resource.
      *
      * @param  \Laravel\Nova\Http\Requests\UpdateResourceRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function handle(UpdateResourceRequest $request)
+    public function handle(UpdateResourceRequest $request): JsonResponse
     {
         $route = call_user_func($request->getRouteResolver());
         $route->setParameter('resource', $this->resourceName);

@@ -7,6 +7,7 @@ use Whitecube\NovaPage\Pages\Manager;
 use Laravel\Nova\Http\Requests\ResourceIndexRequest;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\JsonResponse;
 
 abstract class ResourceIndexController extends Controller
 {
@@ -31,9 +32,9 @@ abstract class ResourceIndexController extends Controller
      *
      * @param  \Laravel\Nova\Http\Requests\ResourceIndexRequest  $request
      * @param  \Whitecube\NovaPage\Pages\Manager  $manager
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function handle(ResourceIndexRequest $request, Manager $manager)
+    public function handle(ResourceIndexRequest $request, Manager $manager): JsonResponse
     {
         $paginator = $this->paginator($request, $manager);
 

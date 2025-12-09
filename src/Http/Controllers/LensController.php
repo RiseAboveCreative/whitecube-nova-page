@@ -3,6 +3,7 @@
 namespace Whitecube\NovaPage\Http\Controllers;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Http\JsonResponse;
 
 class LensController extends Controller
 {
@@ -10,10 +11,11 @@ class LensController extends Controller
     /**
      * List the actions for the given resource.
      *
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        return collect();
+        return response()->json(collect());
     }
 
 }
