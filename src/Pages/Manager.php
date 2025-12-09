@@ -4,8 +4,9 @@ namespace Whitecube\NovaPage\Pages;
 
 use Illuminate\Routing\Route;
 use Illuminate\Http\Resources\ConditionallyLoadsAttributes;
+use Illuminate\Database\Eloquent\Model;
 
-class Manager
+class Manager extends Model
 {
     use ConditionallyLoadsAttributes,
         Concerns\QueriesResources,
@@ -26,13 +27,28 @@ class Manager
     protected $current;
 
     /**
+     * Indicate that the model does not use a database table.
+     *
+     * @var bool
+     */
+    protected $table = null;
+
+    /**
+     * Indicate that the model does not use timestamps.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Create the Main Service Singleton
      *
      * @return void
      */
-    public function __construct(TemplatesRepository $repository)
+    public function __construct(TemplatesRepository $repository = null)
     {
-        $this->repository = $repository;
+        // Don't call parent constructor to avoid Model initialization
+        $this->repository = $repository ?? \app(TemplatesRepository::class);
     }
 
     /**
@@ -56,7 +72,7 @@ class Manager
      */
     public function register($type, $name, $template)
     {
-        app()->bind($template, function () use ($name) {
+        \app()->bind($template, function () use ($name) {
             return $this->option($name);
         });
 
@@ -189,6 +205,36 @@ class Manager
     public function getRepository()
     {
         return $this->repository;
+    }
+
+    /**
+     * Override to prevent database operations
+     *
+     * @return bool
+     */
+    public function exists()
+    {
+        return false;
+    }
+
+    /**
+     * Override to prevent database operations
+     *
+     * @return mixed
+     */
+    public function getKey()
+    {
+        return null;
+    }
+
+    /**
+     * Override to prevent database operations
+     *
+     * @return string
+     */
+    public function getKeyName()
+    {
+        return 'id';
     }
 
 }
